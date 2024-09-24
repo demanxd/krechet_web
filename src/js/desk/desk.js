@@ -55,7 +55,7 @@ class Desk extends React.Component {
         console.log("main", this.state);
         return (<div>
             { <main>
-                <tasks_body>
+                <div className="tasks_body">
                 {
                     this.state.map( (element) => ( 
                             <div>
@@ -64,10 +64,10 @@ class Desk extends React.Component {
                         )
                     )
                 }
-                </tasks_body>
-                <top_panel>
+                </div>
+                <div className="top_panel">
                     <h3>top panel</h3>
-                </top_panel>
+                </div>
                 <aside>
                     <h3>aside panel</h3>
                 </aside>

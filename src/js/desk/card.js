@@ -1,6 +1,6 @@
 import React from "react"
 
-class Task extends React.Component { 
+class Card extends React.Component { 
     constructor(props) {
         super(props)
         this.state = {
@@ -24,4 +24,4 @@ class Task extends React.Component {
     }
 }
 
-  export default Task
+  export default Card

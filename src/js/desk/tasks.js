@@ -1,5 +1,5 @@
 import React from "react"
-import Task from "./task"
+import Card from "./card"
 
 
 
@@ -12,7 +12,7 @@ class Tasks extends React.Component {
                     {
                         this.props.tasks.cards.map( (element) => ( 
                                 <div>
-                                    <Task key = {element.id} task = {element} />
+                                    <Card key = {element.id} task = {element} />
                                 </div>
                             )
                         ) 
