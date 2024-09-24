@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+main {
+    margin: 0,0;
+}
+
 body {
     background-color: #333;
     color: #fff;
@@ -12,8 +16,8 @@ body {
     font-weight: 300;
 }
 
-top_panel {
-    background-color: #1f1746;
+.top_panel {
+    background-color: #2f1b94;
     float: left;
     position: absolute;
     text-align: center;
@@ -32,10 +36,6 @@ aside {
     left: 0;
     bottom: 0;
     width: 150px;
-}
-
-main {
-    margin: 0,0;
 }
 
 main .user {
@@ -117,11 +117,11 @@ main .task_small {
     padding: 10px;
 }
 
-/* .tasks_body {
+tasks_body {
+    margin: 0, 0;
     left: 100px;
-    float: left;
     margin-left: 100px; 
-} */
+} 
 
 .group_headers{
     background-color: #719e1e;
