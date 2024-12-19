@@ -36,12 +36,11 @@ const Login = () => {
             );
             console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.userRole;
-            setAuth({ user, pwd, roles, accessToken });
+            setAuth({ user, pwd, accessToken });
             setUser('');
             setPwd('');
             setSuccess(true);
-            navigate('/');
+            navigate('/home');
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
