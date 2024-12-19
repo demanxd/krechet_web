@@ -1,65 +1,76 @@
 import React from "react";
+import { useRef, useState, useEffect, useContext } from 'react';
 import TasksList from "./taskslist"
-// import Header from "./header";
-// import Users from "./users";
-// import AddUser from "./AddUser";
+import { useParams } from "react-router-dom";
+import useAuth from '../context/UseAuth';
 
-//axios for rest
+import axios from '../api/axios';
+const CARDS_URL = "/card/all"
 
-class Desk extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = [
-            [
-                {
-                    group: 'ToDo'
-                },
-                {
-                    cards: [
-                        {
-                            id: 1,
-                            name: 'Создание первой версии кречета',
-                            description: 'Создание первой самостоятельной версии кречета, которая послужит намёком на полноценную замену забугорного сервиса трелло'
-                        },
-                        {
-                            id: 2,
-                            name: 'Улучшение первой версии кречета',
-                            description: 'Улучшение первой самостоятельной версии кречета, которая послужит намёком на полноценную замену забугорного сервиса трелло'
+const Desk = () => {
+    const [errMsg, setErrMsg] = useState('');
+    const [desks, setDesks] = useState([]);
+    const componentIsMounted = useRef(true);
+    let err;
+    console.log("Desk");
+    const {auth} = useAuth();
+    console.log("Desk");
+    console.log("Desk auth = ", auth);
+    const params = useParams();
+    console.log('desk param = ', params);
+
+    useEffect(() => {
+
+        async function fetchDesks() {
+    
+            try {
+                console.log("on request");
+                const response = await axios.post(CARDS_URL,
+                    {
+                        'boardID': params.deskID
+                    },
+                    {
+                        timeout: 3000,
+                        headers: {
+                            'Authorization': 'Bearer ' + auth.accessToken,
+                            'Host' : 'Krechet UI'
                         }
-                    ]
+                    }
+                );
+                console.log("GetDescs");
+                console.log("response = ", response);
+    
+                if (componentIsMounted.current) {
+                    setDesks(response?.data);
                 }
-            ],
-            [
-                {
-                    group: 'InProgress'
-                },
-                {
-                    cards: [
-                        {
-                            id: 3,
-                            name: 'Создание первой версии кречета',
-                            description: 'Создание первой самостоятельной версии кречета, которая послужит намёком на полноценную замену забугорного сервиса трелло'
-                        },
-                        {
-                            id: 4,
-                            name: 'Улучшение первой версии кречета',
-                            description: 'Улучшение первой самостоятельной версии кречета, которая послужит намёком на полноценную замену забугорного сервиса трелло'
-                        }
-                    ]
+            } catch (err) {
+                if (!err?.response) {
+                    setErrMsg('No Server Response');
+                } else if (err.response?.status === 400) {
+                    setErrMsg('Missing Username or Password');
+                } else if (err.response?.status === 401) {
+                    setErrMsg('Unauthorized');
+                } else {
+                    setErrMsg('Login Failed');
                 }
-            ]
-        ]
-    }
+            }
+        }
 
-    render() {
-        console.log("main", this.state);
-        return (<div>
+        fetchDesks();
+    },[]);
+    console.log("Desk auth = ", auth);
+    console.log("Desk data = ", desks);
+
+    if (desks.length !== 0)
+    {
+        return (
+        <div>
             { <main>
                 <div className="tasks_body">
                 {
-                    this.state.map( (element) => ( 
-                            <div>
-                                <TasksList tasks={element} key = {element.id} />
+                    desks.map( (element) => ( 
+                            <div key = {element.id} >
+                                <TasksList tasks={element} />
                             </div>
                         )
                     )
@@ -72,7 +83,25 @@ class Desk extends React.Component {
                     <h3>aside panel</h3>
                 </aside>
             </main> }
-        </div>)
+        </div>
+        )
+    }
+    else
+    {
+        return (
+        <div>
+            { <main>
+                <div className="tasks_body">
+                </div>
+                <div className="top_panel">
+                    <h3>top panel</h3>
+                </div>
+                <aside>
+                    <h3>aside panel</h3>
+                </aside>
+            </main> }
+        </div>
+        )
     }
 }
 

@@ -3,22 +3,24 @@ import Card from "./card"
 
 
 
-class Tasks extends React.Component {
-    render() {
-        console.log(this.props);
-        if (this.props.tasks.cards.length > 0)
-            return (
-                <div>
-                    {
-                        this.props.tasks.cards.map( (element) => ( 
-                                <div>
-                                    <Card key = {element.id} task = {element} />
-                                </div>
-                            )
-                        ) 
-                    }
-                </div>
-            )
+const Tasks = ({tasks}) => {
+    console.log("Tasks ", tasks);
+    const arr = tasks.slice(1);
+    console.log("Tasks slice ", arr);
+    if (arr.length > 0)
+    {
+        return (
+            <div>
+            {
+                arr.map( (element) => ( 
+                        <div key = {element.id}>
+                            <Card task = {element}/>
+                        </div>
+                    )
+                ) 
+            }
+            </div>
+        )
     }
 }
 
