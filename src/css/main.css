@@ -122,7 +122,8 @@ main .task_small {
     padding: 10px;
 }
 
-tasks_body {
+tasks_body,
+.home {
     margin: 0, 0;
     left: 100px;
     margin-left: 100px; 
@@ -144,7 +145,8 @@ tasks_body {
     -webkit-box-orient: vertical;
 }
 
-.tasks_small {
+.tasks_small,
+.desk_small {
     left: 180px;
     top: 30px;
     margin-top: 50px;
@@ -154,7 +156,8 @@ tasks_body {
     display:inline;
 }
 
-.task_small_name {
+.task_small_name,
+.desk_small_name {
     top: 0;
     left: 0;
     right: 0;
@@ -163,7 +166,8 @@ tasks_body {
     font-size: 18px;
 }
 
-.task_small_desc {
+.task_small_desc,
+.desk_small_desc {
     background-color: #3e8fa0;
     font-size: 15px;
     content: "";
