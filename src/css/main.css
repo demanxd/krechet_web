@@ -127,7 +127,17 @@ tasks_body,
     margin: 0, 0;
     left: 100px;
     margin-left: 100px; 
-} 
+}
+
+.desks_body {
+    left: 180px;
+    top: 30px;
+    margin-top: 50px;
+    margin-left: 50px;
+    float: left;
+    position: relative;
+    display:inline;
+}
 
 .group_headers{
     background-color: #719e1e;
