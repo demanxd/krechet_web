@@ -2,7 +2,6 @@ import React from "react"
 import Card from "./card"
 
 
-
 const Tasks = ({tasks}) => {
     console.log("Tasks ", tasks);
     const arr = tasks.slice(1);

@@ -1,17 +1,17 @@
 import React from "react";
-import { useRef, useState, useEffect, useContext } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import TasksList from "./taskslist"
 import { useParams } from "react-router-dom";
 import useAuth from '../context/UseAuth';
 
 import axios from '../api/axios';
-const CARDS_URL = "/card/all"
-const LIST_CREATE = "/list/create"
+import {CARDS_URL, LIST_CREATE} from '../common/api_links'
+import { handleCreateList } from '../common/api_funks';
 
-const Desk = () => {
+
+const DeskView = () => {
     const [desks, setDesks] = useState([]);
     const componentIsMounted = useRef(true);
-    let err;
     console.log("Desk");
     const {auth} = useAuth();
     console.log("Desk");
@@ -61,42 +61,6 @@ const Desk = () => {
         fetchDesks();
     },[]);
 
-    const handleCreateList = async (e) => {
-        e.preventDefault();
-        console.log("listCreate ", listCreate);
-
-        try {
-            const response = await axios.post(LIST_CREATE,
-                {
-                    "boardID": params.deskID,
-                    "listName": listCreate
-                },
-                {
-                    timeout: 3000,
-                    headers: {
-                        'Authorization': 'Bearer ' + auth.accessToken,
-                        'Host' : 'Krechet UI'
-                    }
-                }
-            );
-            console.log("console return", JSON.stringify(response?.data));
-        } catch (err) {
-            if (!err?.response) {
-                console.log('No Server Response');
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                console.log('Missing Username or Password');
-                setErrMsg('Missing Username or Password');
-            } else if (err.response?.status === 401) {
-                console.log('Unauthorized');
-                setErrMsg('Unauthorized');
-            } else {
-                console.log('Login Failed');
-                setErrMsg('Login Failed');
-            }
-        }
-    }
-
     console.log("Desk auth = ", auth);
     console.log("Desk data = ", desks);
 
@@ -114,7 +78,7 @@ const Desk = () => {
                             )
                         )
                     }
-                    <form onSubmit={(e) => handleCreateList(e)} className="tasks_small" name="dsfa">
+                    <form onSubmit={(e) => handleCreateList(e, listCreate, params, auth)} className="tasks_small" name="dsfa">
                         <input className="group_headers"
                             type="text"
                             onChange={(e) => setListCreate(e.target.value)}
@@ -162,4 +126,4 @@ const Desk = () => {
     }
 }
 
-export default Desk
+export default DeskView

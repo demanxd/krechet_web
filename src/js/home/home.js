@@ -1,32 +1,23 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from "../context/AuthProvider";
+import { useRef, useState, useEffect } from 'react';
 import React from "react";
 import DesksList from "./deskslist"
 import useAuth from '../context/UseAuth';
-import {useNavigate} from 'react-router-dom';
 
 import axios from '../api/axios';
-import Button from '../common/button'
+import { handleCreateDesk } from '../common/api_funks';
 
-const DESKS_URL = '/board/all';
-const DESK_CREATE_URL = '/board/create'
-const DESK_REMOVE_URL = '/board/delete'
-const DESK_UPDATE_URL = '/board/update'
+import {DESKS_URL} from '../common/api_links'
 
 
-//add KNOPA4KI
 
 const Home = () => {
     const [errMsg, setErrMsg] = useState('');
     const [desks, setDesks] = useState([]);
     const componentIsMounted = useRef(true);
-    const errRef = useRef();
-    let err;
     console.log("Home");
     const {auth} = useAuth();
     console.log("Home");
     console.log("Home auth = ", auth);
-    const navigate = useNavigate();
     useEffect(() => {
 
         async function fetchDesks() {
@@ -62,42 +53,6 @@ const Home = () => {
         fetchDesks();
     },[]);
     const [deskname, setDeskname] = useState('');
-
-    const handleCreateDesk = async (e) => {
-        e.preventDefault();
-        console.log("deskname ", deskname)
-
-        try {
-            const response = await axios.post(DESK_CREATE_URL,
-                {
-                    'boardname': deskname,
-                },
-                {
-                    timeout: 3000,
-                    headers: {
-                        'Authorization': 'Bearer ' + auth.accessToken,
-                        'Host' : 'Krechet UI'
-                    }
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            // navigate('/home');
-        } catch (err) {
-            if (!err?.response) {
-                console.log('No Server Response');
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                console.log('Missing Username or Password');
-                setErrMsg('Missing Username or Password');
-            } else if (err.response?.status === 401) {
-                console.log('Unauthorized');
-                setErrMsg('Unauthorized');
-            } else {
-                console.log('Login Failed');
-                setErrMsg('Login Failed');
-            }
-        }
-    }
     
     console.log("Home componentIsMounted = ", componentIsMounted);
     
@@ -116,7 +71,7 @@ const Home = () => {
                             )
                         )
                     }
-                    <form onSubmit={(e) => handleCreateDesk(e)} className="desks_body" name="dsfa">
+                    <form onSubmit={(e) => handleCreateDesk(e, deskname, auth)} className="desks_body" name="dsfa">
                         <input className="desks_body"
                             type="text"
                             onChange={(e) => setDeskname(e.target.value)}
