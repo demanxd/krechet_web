@@ -104,7 +104,7 @@ const DeskView = () => {
         <div>
             { <main>
                 <div className="tasks_body">
-                    <form onSubmit={(e) => handleCreateList(e)} className="tasks_small" name="dsfa">
+                    <form onSubmit={(e) => handleCreateList(e, listCreate, params, auth)} className="tasks_small" name="dsfa">
                         <input className="group_headers"
                             type="text"
                             onChange={(e) => setListCreate(e.target.value)}
