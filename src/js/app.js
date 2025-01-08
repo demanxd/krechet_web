@@ -1,6 +1,6 @@
 import React from "react"
 import { Route, Routes} from "react-router-dom"
-import Desk from "./desk/desk"
+import DeskView from "./desk/deskview.js"
 import Authorizepage from "./auth/authorizepage"
 import Login from "./auth/login"
 import Register from "./auth/registration.js"
@@ -12,7 +12,7 @@ export default function App() {
     <div>
         <AuthProvider>
             <Routes>
-                <Route path="/desk/:deskID" element={<Desk />} />
+                <Route path="/desk/:deskID" element={<DeskView />} />
                 <Route path="/auth2" element={<Authorizepage />} />
                 <Route path="/auth" element={<Login />} />
                 <Route path="/register" element={<Register />} />

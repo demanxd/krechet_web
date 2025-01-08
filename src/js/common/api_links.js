@@ -1,0 +1,9 @@
+export const BOARD_DELETE = "/board/delete";
+export const DESKS_URL = '/board/all';
+export const DESK_CREATE_URL = '/board/create';
+export const CARDS_URL = "/card/all";
+export const LIST_CREATE = "/list/create";
+export const CARD_DELETE = "/card/delete";
+export const CARD_UPDATE = "/card/update";
+export const LIST_DELETE = "/list/delete";
+export const CARD_CREATE_URL = '/card/create';
