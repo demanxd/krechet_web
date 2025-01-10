@@ -1,12 +1,12 @@
 import React from "react"
 import Desks from "./desks"
 
-const DesksList = ({desk}) => {
+const DesksList = ({desk, setDesks}) => {
 
     console.log("DesksList desk", desk);
     return (
         <div className="tasks_small">
-            <Desks desk={desk} />
+            <Desks desk={desk} setDesks={setDesks} />
         </div>
     );
 }

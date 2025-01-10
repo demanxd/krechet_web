@@ -6,7 +6,7 @@ import useAuth from '../context/UseAuth';
 import { handleCreateCard } from "../common/api_funks";
 
 
-const TasksList = ({tasks}) => {
+const TasksList = ({tasks, setDesk, params}) => {
     console.log("TasksList tasks", tasks);
     console.log("TasksList ", tasks[0]);
     console.log("TasksList ", tasks.length);
@@ -22,9 +22,9 @@ const TasksList = ({tasks}) => {
     if (tasks.length > 0)
         return (
             <div className="tasks_small">
-                <Groupheaders group={tasks[0]} />
-                <Tasks tasks={tasks}  /> 
-                <form onSubmit={(e) => handleCreateCard(e, tasks[0].id, addCards, auth)} className="task_small" name="dsfa">
+                <Groupheaders group={tasks[0]} setDesk={setDesk} params={params}/>
+                <Tasks tasks={tasks} setDesk={setDesk} params={params}  /> 
+                <form onSubmit={(e) => handleCreateCard(e, tasks[0].id, addCards, auth, setDesk, params)} className="task_small" name="dsfa">
                     <input className="task_small"
                         type="text"
                         onChange={(e) => handleChange(tasks, tasks[0].id, e.target.value)}
