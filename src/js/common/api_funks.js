@@ -85,7 +85,6 @@ export const deleteDesk = async (e, desk, auth, setDesks) => {
         );
         console.log("console return", JSON.stringify(response?.data));
         fetchUserDesks(setDesks, auth);
-        alert('Доска удалена!');
     } catch (err) {
         if (!err?.response) {
             console.log('No Server Response');
@@ -189,7 +188,6 @@ export const deleteTask = async (e, task, auth, setDesk, params) => {
         );
         console.log("console return", JSON.stringify(response?.data));
         fetchDeskData(setDesk, params, auth);
-        alert('Задача удалена!');
     } catch (err) {
         if (!err?.response) {
             console.log('No Server Response');
@@ -208,10 +206,8 @@ export const upTask = async (e, task, auth, setDesk, params) => {
     console.log("upping");
     console.log("upping task = ", task);
     if (task.position == 0)
-    {
-        alert('Задача в самом верху!');
         return;
-    }
+
     let position = Number(task.position) - 1;
     console.log("upping task = ", task);
     console.log("upping positionNew = ", position);
@@ -232,7 +228,6 @@ export const upTask = async (e, task, auth, setDesk, params) => {
         );
         console.log("console return", JSON.stringify(response?.data));
         fetchDeskData(setDesk, params, auth);
-        alert('Задача поднята!');
     } catch (err) {
         if (!err?.response) {
             console.log('No Server Response');
@@ -270,7 +265,6 @@ export const downTask = async (e, task, auth, setDesk, params) => {
         );
         console.log("console return", JSON.stringify(response?.data));
         fetchDeskData(setDesk, params, auth);
-        alert('Задача опущена!');
     } catch (err) {
         if (!err?.response) {
             console.log('No Server Response');
@@ -310,7 +304,6 @@ export const handleMoveRight = async (e, task, auth, setDesk, params) => {
         );
         console.log("console return", JSON.stringify(response?.data));
         fetchDeskData(setDesk, params, auth);
-        alert('Задача перемещена вправо!');
     } catch (err) {
         if (!err?.response) {
             console.log('No Server Response');
@@ -350,7 +343,6 @@ export const handleMoveLeft = async (e, task, auth, setDesk, params) => {
         );
         console.log("console return", JSON.stringify(response?.data));
         fetchDeskData(setDesk, params, auth);
-        alert('Задача перемещена влево!');
     } catch (err) {
         if (!err?.response) {
             console.log('No Server Response');
@@ -385,7 +377,6 @@ export const deleteList = async (e, group, auth, setDesk, params) => {
         console.log("console return", JSON.stringify(response?.data));
         console.log("response = ", response);
         fetchDeskData(setDesk, params, auth);
-        alert('Лист удалён!');
     } catch (err) {
         console.log("err = ", err)
         if (!err?.response) {
