@@ -1,6 +1,6 @@
 import React from "react"
 import useAuth from '../context/UseAuth';
-import { deleteTask, upTask, downTask } from "../common/api_funks";
+import { deleteTask, upTask, downTask, handleMoveLeft, handleMoveRight } from "../common/api_funks";
 
 
 const Card = ({task, setDesk, params}) => { 
@@ -23,6 +23,12 @@ const Card = ({task, setDesk, params}) => {
             </button>
             <button className="delete-button" onClick={(e) => downTask(e, task, auth, setDesk, params)} >
                 <img src="{DELETE_ICON_PATH}" alt="Вниз" width="30" height="30" />
+            </button>
+            <button className="delete-button" onClick={(e) => handleMoveLeft(e, task, auth, setDesk, params)} >
+                <img src="{DELETE_ICON_PATH}" alt="Влево" width="30" height="30" />
+            </button>
+            <button className="delete-button" onClick={(e) => handleMoveRight(e, task, auth, setDesk, params)} >
+                <img src="{DELETE_ICON_PATH}" alt="Вправо" width="30" height="30" />
             </button>
             </div>
         </div>

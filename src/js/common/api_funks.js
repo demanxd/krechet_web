@@ -283,6 +283,86 @@ export const downTask = async (e, task, auth, setDesk, params) => {
         }
     }
 }
+
+export const handleMoveRight = async (e, task, auth, setDesk, params) => {
+    e.preventDefault();
+    console.log("upping");
+    console.log("upping task = ", task);
+    let list = Number(task.list) + 1;
+    let position = Number(task.position);
+    console.log("upping task = ", task);
+    console.log("upping list = ", list);
+
+    try {
+        const response = await axios.post(CARD_UPDATE,
+            {
+                "id": task.id,
+                "listIDNew": list,
+                "positionNew": position,
+            },
+            {
+                timeout: 3000,
+                headers: {
+                    'Authorization': 'Bearer ' + auth.accessToken,
+                    'Host' : 'Krechet UI'
+                }
+            }
+        );
+        console.log("console return", JSON.stringify(response?.data));
+        fetchDeskData(setDesk, params, auth);
+        alert('Задача перемещена вправо!');
+    } catch (err) {
+        if (!err?.response) {
+            console.log('No Server Response');
+        } else if (err.response?.status === 400) {
+            console.log('Missing Username or Password');
+        } else if (err.response?.status === 401) {
+            console.log('Unauthorized');
+        } else {
+            console.log('Login Failed');
+        }
+    }
+}
+
+export const handleMoveLeft = async (e, task, auth, setDesk, params) => {
+    e.preventDefault();
+    console.log("upping");
+    console.log("upping task = ", task);
+    let list = Number(task.list) - 1;
+    let position = Number(task.position);
+    console.log("upping task = ", task);
+    console.log("upping list = ", list);
+
+    try {
+        const response = await axios.post(CARD_UPDATE,
+            {
+                "id": task.id,
+                "listIDNew": list,
+                "positionNew": position,
+            },
+            {
+                timeout: 3000,
+                headers: {
+                    'Authorization': 'Bearer ' + auth.accessToken,
+                    'Host' : 'Krechet UI'
+                }
+            }
+        );
+        console.log("console return", JSON.stringify(response?.data));
+        fetchDeskData(setDesk, params, auth);
+        alert('Задача перемещена влево!');
+    } catch (err) {
+        if (!err?.response) {
+            console.log('No Server Response');
+        } else if (err.response?.status === 400) {
+            console.log('Missing Username or Password');
+        } else if (err.response?.status === 401) {
+            console.log('Unauthorized');
+        } else {
+            console.log('Login Failed');
+        }
+    }
+}
     
 export const deleteList = async (e, group, auth, setDesk, params) => {
     e.preventDefault();
