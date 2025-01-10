@@ -2,7 +2,7 @@ import React from "react"
 import Card from "./card"
 
 
-const Tasks = ({tasks}) => {
+const Tasks = ({tasks, setDesk, params}) => {
     console.log("Tasks ", tasks);
     const arr = tasks.slice(1);
     console.log("Tasks slice ", arr);
@@ -13,7 +13,7 @@ const Tasks = ({tasks}) => {
             {
                 arr.map( (element) => ( 
                         <div key = {element.id}>
-                            <Card task = {element}/>
+                            <Card task = {element} setDesk={setDesk} params={params}/>
                         </div>
                     )
                 ) 
