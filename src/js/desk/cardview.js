@@ -64,9 +64,7 @@ const ModalCardView = ({ isOpen, onClose, task }) => {
                                 </div>
                             </div>
                         ) : (
-                            <div style={{ cursor: 'pointer' }}>
-                                {text}
-                            </div>
+                            <div style={{ cursor: 'pointer' }} dangerouslySetInnerHTML={{ __html: text }} />
                         )}
                     </div>
                     <div className="card-comments">
