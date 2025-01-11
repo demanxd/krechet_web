@@ -42,7 +42,7 @@ const Card = ({task, setDesk, params}) => {
                 <img src="{DELETE_ICON_PATH}" alt="Вправо" width="30" height="30" />
             </button>
             </div>
-            <ModalCardView isOpen={isModalOpen} onClose={handleCloseModal} task={task} />
+            <ModalCardView isOpen={isModalOpen} onClose={handleCloseModal} task={task} setDesk={setDesk} params={params} />
         </div>
         </div>
     );
