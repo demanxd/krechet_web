@@ -356,6 +356,37 @@ export const handleMoveLeft = async (e, task, auth, setDesk, params) => {
     }
 }
     
+export const pullDescriptionTask = async (e, task, text, auth, setDesk, params) => {
+    e.preventDefault();
+    try {
+        const response = await axios.post(CARD_UPDATE,
+            {
+                "id": task.id,
+                "descriptionNew": text,
+            },
+            {
+                timeout: 3000,
+                headers: {
+                    'Authorization': 'Bearer ' + auth.accessToken,
+                    'Host' : 'Krechet UI'
+                }
+            }
+        );
+        console.log("console return", JSON.stringify(response?.data));
+        fetchDeskData(setDesk, params, auth);
+    } catch (err) {
+        if (!err?.response) {
+            console.log('No Server Response');
+        } else if (err.response?.status === 400) {
+            console.log('Missing Username or Password');
+        } else if (err.response?.status === 401) {
+            console.log('Unauthorized');
+        } else {
+            console.log('Login Failed');
+        }
+    }
+}
+    
 export const deleteList = async (e, group, auth, setDesk, params) => {
     e.preventDefault();
     console.log("deleting");

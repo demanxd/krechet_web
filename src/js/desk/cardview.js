@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { pullDescriptionTask } from '../common/api_funks';
+import useAuth from '../context/UseAuth';
 
-const ModalCardView = ({ isOpen, onClose, task }) => {
-    const [text, setText] = useState('');
+const ModalCardView = ({ isOpen, onClose, task, setDesk, params }) => {
+    const [text, setText] = useState(task.description);
     const [isEditing, setIsEditing] = useState(false);
+    const {auth} = useAuth();
 
     useEffect(() => {
         if (isOpen) {
@@ -34,6 +37,9 @@ const ModalCardView = ({ isOpen, onClose, task }) => {
 
     const handleSave = (e) => {
         e.stopPropagation();
+        console.log("handleSave task = ", task)
+        console.log("handleSave task = ", text)
+        pullDescriptionTask(e, task, text, auth, setDesk, params);
         setIsEditing(false);
     };
 
