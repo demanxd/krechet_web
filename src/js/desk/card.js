@@ -1,16 +1,27 @@
-import React from "react"
+// import React from "react"
+import React, { useState } from 'react';
 import useAuth from '../context/UseAuth';
 import { deleteTask, upTask, downTask, handleMoveLeft, handleMoveRight } from "../common/api_funks";
+import ModalCardView from './cardview.js'
 
 
 const Card = ({task, setDesk, params}) => { 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
     const {auth} = useAuth();
 
     console.log("Card task", task);
     return (
         <div>
         <div className="task_small">
-            <div className="task_small_name">
+            <div className="task_small_name" onClick={handleOpenModal}>
             <h3>{task.name}</h3>
             </div>
             <div className="task_small_desc">
@@ -31,6 +42,7 @@ const Card = ({task, setDesk, params}) => {
                 <img src="{DELETE_ICON_PATH}" alt="Вправо" width="30" height="30" />
             </button>
             </div>
+            <ModalCardView isOpen={isModalOpen} onClose={handleCloseModal} task={task} />
         </div>
         </div>
     );
